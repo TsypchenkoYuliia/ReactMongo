@@ -1,0 +1,88 @@
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #E01A76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nameContainer {
+    margin: auto;
+    margin-top: 250px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.askContainer {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-Top: 100px;
+    width: 900px;
+}
+
+.title {
+    margin: 20px;
+    font-size: 20px;
+}
+
+.topicContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.askContainer {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-Top: 100px;
+    width: 900px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+}
+
+.main {
+    background-color: #eceaea;
+    padding: 40px;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+}
+
+.cardBox {
+    width: 800px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: row;
+}
