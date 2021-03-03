@@ -4,6 +4,7 @@ import { Layout } from './components/Layout';
 import { Login } from './components/Login';
 import { NewQuestion } from './components/NewQuestion';
 import { Questions } from './components/Questions';
+import { Question } from './components/Question';
 import './custom.css'
 
 export default class App extends Component {
@@ -17,6 +18,7 @@ export default class App extends Component {
             <Route exact path='/questions' component={Questions} />
             <Route exact path='/questions/topic/:top' component={Questions} />
             <Route exact path='/questions/:filter' component={Questions} />
+            <Route exact path='/question/:id' component={Question} />
       </Layout>
     );
   }

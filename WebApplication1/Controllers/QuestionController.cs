@@ -63,5 +63,16 @@ namespace WebApplication1.Controllers
             return await _questionRepository.GetByTopicAsync(topic);
         }
 
+        //[HttpGet("rating/{rating}")]
+        //public async Task<IEnumerable<Question>> Get(string rating, int d, int r)
+        //{
+        //    return null;
+        //}
+
+        [HttpGet("getbyid/{id}")]
+        public async Task<Question> GetById(string id)
+        {
+            return await _questionRepository.GetByIdAsync(id);
+        }
     }
 }

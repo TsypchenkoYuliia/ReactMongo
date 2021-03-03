@@ -34,5 +34,20 @@ namespace WebApplication1.Context.Repositories
             var filter = Builders<Question>.Filter.Where(x => x.Topics.Contains(top));
             return await _questions.FindAsync(filter).Result.ToListAsync();
         }
+
+        public async Task<Question> GetByIdAsync(string id)
+        {
+            var filter = Builders<Question>.Filter.Eq("Id", id);
+            return await _questions.FindSync(filter).FirstOrDefaultAsync();
+        }
+
+        public async Task AddAnswerAsync(string id, Answer answer)
+        {
+            var filter = Builders<Question>.Filter.Eq("Id", id);
+            var question =  await _questions.FindSync(filter).FirstOrDefaultAsync();
+            question.Answers.Add(answer);
+
+            await _questions.ReplaceOneAsync(filter, question);
+        }
     }
 }

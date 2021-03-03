@@ -29,3 +29,11 @@ export const getQuestionsByTopic = (topic) => {
 export const getQuestionsByFilter = (filter) => {
 
 }
+
+export const getQuestionById = (id) => {
+    return axiosApi.get(`question/getbyid/${id}`);
+}
+
+export const postAnswer = (questionId, answer) => {
+    return axiosApi.post(`answer/${questionId}`, answer);
+}

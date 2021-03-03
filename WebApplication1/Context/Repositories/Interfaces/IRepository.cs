@@ -9,5 +9,6 @@ namespace WebApplication1.Context.Repositories.Interfaces
     {
         Task InsertOneAsync(T obj);
         Task<IEnumerable<T>> GetAllAsync();
+        Task<T> GetByIdAsync(string id);
     }
 }
