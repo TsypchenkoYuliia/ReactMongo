@@ -57,7 +57,7 @@ export const NewQuestion = () => {
         
         var item = {
             title: title,
-            textQuestion: textQuestion,
+            text: textQuestion.replace("<p>", "").replace("</p>", ""),
             topics: selectedTopics.length === 0 ? [] : selectedTopics[selectedTopics.length - 1],
             answers: [],
             author: localStorage.getItem("userName"),

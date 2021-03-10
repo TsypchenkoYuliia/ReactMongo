@@ -86,3 +86,8 @@ code {
     display: flex;
     flex-direction: row;
 }
+
+.answerContainer {
+    display: flex;
+    flex-direction: row;
+}

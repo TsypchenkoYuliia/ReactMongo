@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using WebApplication1.Context.Repositories;
 using WebApplication1.Context.Repositories.Interfaces;
@@ -18,11 +19,15 @@ namespace WebApplication1.Controllers
     {
         private readonly QuestionRepository _questionRepository;
         private readonly TopicRepository _topicRepository;
+        private readonly LikeRepository _likeRepository;
+        private readonly DislikeRepository _dislikeRepository;
 
         public QuestionController()
         {
             _questionRepository = new QuestionRepository();
             _topicRepository = new TopicRepository();
+            _likeRepository = new LikeRepository();
+            _dislikeRepository = new DislikeRepository();
         }
 
         [HttpPost]
@@ -63,16 +68,62 @@ namespace WebApplication1.Controllers
             return await _questionRepository.GetByTopicAsync(topic);
         }
 
-        //[HttpGet("rating/{rating}")]
-        //public async Task<IEnumerable<Question>> Get(string rating, int d, int r)
-        //{
-        //    return null;
-        //}
+        [HttpGet("rating/{rating}")]
+        public async Task<IEnumerable<Question>> GetRating(string rating)
+        {
+            return await _questionRepository.GetByRatingAsync(rating);
+        }
 
         [HttpGet("getbyid/{id}")]
         public async Task<Question> GetById(string id)
         {
             return await _questionRepository.GetByIdAsync(id);
         }
+
+        [HttpGet("votes/{id}")]
+        public async Task<int> GetVotes(string id)
+        {
+            var question = await _questionRepository.GetByIdAsync(id);
+
+            return question.Likes.Count() - question.Dislikes.Count();
+        }
+
+        [HttpPost("like/{id}")]
+        public async Task<HttpStatusCode> Like(string id, Like like)
+        {
+            like.QuestionId = id;
+            var currentLike = await _likeRepository.GetByAuthorAsync(like.Author);
+
+            if (currentLike == null)
+                await _likeRepository.InsertOneAsync(like);
+            else
+                return HttpStatusCode.BadRequest;
+
+            var dislike = await _dislikeRepository.GetByAuthorAsync(like.Author);
+            if (dislike != null)
+                await _dislikeRepository.RemoveAsync(dislike.Id);
+
+            return HttpStatusCode.OK;
+        }
+
+        [HttpPost("dislike/{id}")]
+        public async Task<HttpStatusCode> Dislike(string id, Dislike dislike)
+        {
+            dislike.QuestionId = id;
+            var currentDislike = await _dislikeRepository.GetByAuthorAsync(dislike.Author);
+
+            if (currentDislike == null)
+                await _dislikeRepository.InsertOneAsync(dislike);
+            else
+                return HttpStatusCode.BadRequest;
+
+            var like = await _likeRepository.GetByAuthorAsync(dislike.Author);
+            if (like != null)
+                await _likeRepository.RemoveAsync(like.Id);
+
+            return HttpStatusCode.OK;
+        }
     }
+
+    
 }

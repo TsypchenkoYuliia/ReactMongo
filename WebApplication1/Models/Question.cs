@@ -23,7 +23,7 @@ namespace WebApplication1.Models
         public DateTime CreatedDate { get; set; }
         public IEnumerable<Topic> Topics { get; set; }
         public IList<Answer> Answers { get; set; }
-        public IEnumerable<Like> Likes { get; set; }
-        public IEnumerable<Dislike> Dislikes { get; set; }
+        public IList<Like> Likes { get; set; }
+        public IList<Dislike> Dislikes { get; set; }
     }
 }

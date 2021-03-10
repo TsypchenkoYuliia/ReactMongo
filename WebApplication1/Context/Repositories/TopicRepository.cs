@@ -38,5 +38,11 @@ namespace WebApplication1.Context.Repositories
             var filter = Builders<Topic>.Filter.Eq("Id", id);
             return await _topics.FindSync(filter).FirstOrDefaultAsync();
         }
+
+        public async Task RemoveAsync(string id)
+        {
+            var filter = Builders<Topic>.Filter.Eq("Id", id);
+            await _topics.DeleteOneAsync(filter);
+        }
     }
 }

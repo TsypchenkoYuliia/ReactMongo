@@ -10,6 +10,18 @@ export const postQuestions = (question) => {
     return axiosApi.post(`question/`, question);
 };
 
+export const postLike = (questionId, like) => {
+    return axiosApi.post(`question/like/${questionId}`, like);
+};
+
+export const postDislike = (questionId, dislike) => {
+    return axiosApi.post(`question/dislike/${questionId}`, dislike);
+};
+
+export const getVotes = (questionId) => {
+    return axiosApi.get(`question/votes/${questionId}`);
+};
+
 export const postTopic = (topics) => {
     return axiosApi.post(`topic/`, topics);
 };
@@ -26,8 +38,8 @@ export const getQuestionsByTopic = (topic) => {
     return axiosApi.get(`question/topic/${topic}`);
 }
 
-export const getQuestionsByFilter = (filter) => {
-
+export const getQuestionsByFilter = (rating) => {
+    return axiosApi.get(`question/rating/${rating}`);
 }
 
 export const getQuestionById = (id) => {
@@ -36,4 +48,8 @@ export const getQuestionById = (id) => {
 
 export const postAnswer = (questionId, answer) => {
     return axiosApi.post(`answer/${questionId}`, answer);
+}
+
+export const getAnswers = (questionId) => {
+    return axiosApi.get(`answer/${questionId}`);
 }

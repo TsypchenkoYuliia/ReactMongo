@@ -32,5 +32,11 @@ namespace WebApplication1.Context.Repositories
         {
             await _answers.InsertOneAsync(obj);
         }
+
+        public async Task RemoveAsync(string id)
+        {
+            var filter = Builders<Answer>.Filter.Eq("Id", id);
+            await _answers.DeleteOneAsync(filter);
+        }
     }
 }

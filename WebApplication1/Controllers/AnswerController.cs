@@ -26,8 +26,16 @@ namespace WebApplication1.Controllers
         public async Task Post(string questionId, [FromBody] Answer model)
         {
             model.CreatedDate = DateTime.Now.Date;
+            model.Dislikes = new List<Dislike>();
+            model.Likes = new List<Like>();
             await _answerRepository.InsertOneAsync(model);
             await _questionRepository.AddAnswerAsync(questionId, model);
+        }
+
+        [HttpGet("{questionId}")]
+        public async Task<IEnumerable<Answer>> Get(string questionId)
+        {
+            return await _questionRepository.GetAnswersAsync(questionId);
         }
     }
 }
